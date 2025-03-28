@@ -109,6 +109,7 @@ $(document).ready(function () {
         let of = $(this).find('.of-text').text();
         let item = $(this).find('.item-text').text();
 
+        let image = $(this).find('.pano-image img').attr('src');
 
         for (var i = 0; i < hotspots.length; i++) {
             let pitch = $(hotspots[i]).attr('data-pitch')
@@ -130,7 +131,7 @@ $(document).ready(function () {
 
         let newViewer = pannellum.viewer(currentPano, {
             "type": "equirectangular",
-            "panorama": `../z_assets/outside360` + panoCount + `.jpg`,
+            "panorama": image,
             "autoLoad": true,
             "showControls": false,
             // "hotSpotDebug": true,
