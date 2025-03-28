@@ -2541,7 +2541,8 @@ window.pannellum = (function(window, document, undefined) {
         }
         animated = animated == undefined ? 1000: Number(animated);
 
-        yaw = ((yaw + 180) % 360); // Keep in bounds
+        yaw = ((yaw) % 360); // Keep in bounds
+        // yaw = ((yaw + 180) % 360); // Keep in bounds
 
         if (animated) {
             // Animate in shortest direction
