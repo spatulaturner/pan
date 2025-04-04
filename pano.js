@@ -21,7 +21,6 @@ function clickOpenTooltip() {
         $(span).addClass('active')
         $(div).closest('.panorama').find('.vo-content').text($(div).attr('aria-label'))
         $(div).closest('.panorama').find('.vo-content').attr('tabindex', 0)
-        console.log($(div).closest('.panorama'))
         $(div).closest('.panorama').find('.vo-content').focus();
         $(div).removeClass('isCurrentHotspot')
     }
@@ -136,6 +135,7 @@ $(document).ready(function () {
             "showControls": false,
             // "hotSpotDebug": true,
             "keyboardZoom": false,
+            "mouseZoom": false,
             "hotSpots": hotspotsObj
         })
 
@@ -169,16 +169,66 @@ $(document).ready(function () {
         }, 500) 
     })
 
-    $('.zoom-in').on('click', function (e) {
+    $(document).on('click touch', '.zoom-in', function (e) {
         let panoIndex = $(this).closest('.panorama').attr('index');
         panoIndex = parseInt(panoIndex) - 1;
+
+        let newZoom = viewers[panoIndex].getHfov() - 10;
+        
         viewers[panoIndex].setHfov(viewers[panoIndex].getHfov() - 10);
+
+        if (newZoom < 60) {
+            $(this).parent().find('.zoom-in-enabled').addClass('hidden')
+            $(this).parent().find('.zoom-in-disabled').removeClass('hidden')
+            $(this).attr('disabled', true);
+        } else {
+            $(this).parent().find('.zoom-in-enabled').removeClass('hidden')
+            $(this).parent().find('.zoom-in-disabled').addClass('hidden')
+            $(this).attr('disabled', false);
+        }
+
+        if (newZoom > 110) {
+            $(this).parent().find('.zoom-out-enabled').addClass('hidden')
+            $(this).parent().find('.zoom-out-disabled').removeClass('hidden')
+            $(this).parent().find('.zoom-out').attr('disabled', true);
+        } else {
+            $(this).parent().find('.zoom-out-enabled').removeClass('hidden')
+            $(this).parent().find('.zoom-out-disabled').addClass('hidden')
+            $(this).parent().find('.zoom-out').attr('disabled', false);
+        }
+
     });
     $('.zoom-out').on('click', function (e) {
+        
         let panoIndex = $(this).closest('.panorama').attr('index');
         panoIndex = parseInt(panoIndex) - 1;
+        
+        let newZoom = viewers[panoIndex].getHfov() + 10;
+        
         viewers[panoIndex].setHfov(viewers[panoIndex].getHfov() + 10);
+
+        if (newZoom < 60) {
+            $(this).parent().find('.zoom-in-enabled').addClass('hidden')
+            $(this).parent().find('.zoom-in-disabled').removeClass('hidden')
+            $(this).parent().find('.zoom-in').attr('disabled', true);
+        } else {
+            $(this).parent().find('.zoom-in-enabled').removeClass('hidden')
+            $(this).parent().find('.zoom-in-disabled').addClass('hidden')
+            $(this).parent().find('.zoom-in').attr('disabled', false);
+        }
+
+        if (newZoom > 110) {
+            $(this).parent().find('.zoom-out-enabled').addClass('hidden')
+            $(this).parent().find('.zoom-out-disabled').removeClass('hidden')
+            $(this).attr('disabled', true);
+        } else {
+            $(this).parent().find('.zoom-out-enabled').removeClass('hidden')
+            $(this).parent().find('.zoom-out-disabled').addClass('hidden')
+            $(this).attr('disabled', false);
+        }
+        
     });
+
     $('.fullscreen').on('click', function (e) {
         let panoIndex = $(this).closest('.panorama').attr('index');
         panoIndex = parseInt(panoIndex) - 1;
@@ -233,7 +283,7 @@ $(document).ready(function () {
         let nextYaw;
         let nextPitch;
 
-        $('.pano-hotspots span').each(function () {
+        $(pano).find('.pano-hotspots span').each(function () {
             let htmlHotspot = $(this)
             let hotspotSpanText = $(htmlHotspot).text();
 
@@ -304,7 +354,7 @@ $(document).ready(function () {
         let nextYaw;
         let nextPitch;
 
-        $('.pano-hotspots span').each(function () {
+        $(pano).find('.pano-hotspots span').each(function () {
             let htmlHotspot = $(this)
             let hotspotSpanText = $(htmlHotspot).text();
 
