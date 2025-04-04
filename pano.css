@@ -86,8 +86,8 @@ div.custom-tooltip span {
     visibility: hidden;
     position: absolute;
     border-radius: 8px;
-    background-color: #fff;
-    color: #000;
+    background-color: rgba(45, 45, 45, 0.65);;
+    color: #fff;
     text-align: center;
     max-width: 200px;
     padding: 10px 5px;
@@ -102,6 +102,7 @@ div.custom-tooltip span {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid rgba(78, 78, 78, 0.3)
 }
 
 div.custom-tooltip span.active {
@@ -111,14 +112,18 @@ div.custom-tooltip span.active {
 div.custom-tooltip span.active:after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #fff transparent transparent transparent;
-    bottom: -20px;
-    left: -10px;
-    margin: 0 50%;
+    width: 1px;
+    height: 14px;
+    border-left: 1px solid rgba(78, 78, 78, 0.7);
+    bottom: -14px;
+    left: 0px;
+    margin: auto;
+    right: 0;
+}
+
+div.custom-tooltip.blue span.active:after {
+    height: 18px;
+    bottom: -18px;
 }
 
 .custom-hotspot:focus {
@@ -164,7 +169,12 @@ div.custom-tooltip span.active:after {
     color: #F2F2F7;
     width: 43px;
     height: 43px;
-    background-color: rgba(60, 60, 68, 0.35);
+    background-color: rgba(45, 45, 45, 0.45);
+}
+
+.video-js button {
+    background-color: rgba(45, 45, 45, 0.45);
+
 }
 
 .ctrl:hover {
@@ -184,46 +194,36 @@ div.custom-tooltip span.active:after {
     z-index: 2;
 }
 
-.ctrl.fullscreen:after{
-    content: "\f424";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 0;
-    left: 0;
-    margin: auto;
-    font-family: 'FontAwesome';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 22px;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'liga';
-    transition: transform 250ms;
-    -webkit-text-stroke: .5px rgba(59,59,68,0.3);
+.ctrl.fullscreen .open-fullscreen {
+    display: block;
 }
 
-.ctrl.fullscreen.open:after{
-    content: "\f422";
+.ctrl.fullscreen.open .open-fullscreen {
+    display: none;
+}
+
+.ctrl.fullscreen .close-fullscreen {
+    display: none;
+}
+
+.ctrl.fullscreen.open .close-fullscreen {
+    display: block;
 }
 
 .panorama .hidden {
     display: none;
 }
 
-.ctrl:disabled:hover {
-    background-color: rgba(60, 60, 68, 0.35);
+.ctrl .hidden {
     cursor: not-allowed;
 }
 
-.zoom-in img, .zoom-out img {
+.ctrl:disabled:hover {
+    background-color: rgba(45, 45, 45, 0.45);
+    cursor: not-allowed;
+}
+
+.zoom-in img, .zoom-out img, .open-fullscreen, .close-fullscreen {
     max-width: 20px;
 }
 
@@ -232,7 +232,7 @@ div.custom-tooltip span.active:after {
 }
 
 .pano-hotspot-count {
-    background-color: rgba(60, 60, 68, 0.35);
+    background-color: rgba(45, 45, 45, 0.65);
     position: absolute;
     min-width: 193px;
     bottom: 20px;
