@@ -462,7 +462,7 @@ $(document).ready(function () {
             }
         })
 
-        $(pano).find('.pano-modal.active').click();
+        $(pano).find('.pano-modal.active .close-modal').click();
 
         let nextYaw;
         let nextPitch;
