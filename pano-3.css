@@ -165,6 +165,18 @@ div.custom-tooltip.blue .hs-inner-wrap.active:after {
     align-items: start;
     overflow: scroll;
     margin-top: -60px;
+    position: relative;
+}
+
+.close-modal {
+    border: unset;
+    color: white;
+    background-color: unset;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-bottom: 5px;
+    font-family: "SFProText Regular", "SFUIText Regular", sans-serif;
 }
 
 .hs-inner-wrap img{

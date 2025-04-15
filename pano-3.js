@@ -51,7 +51,10 @@ function clickOpenModal() {
     let div = this.div;
     let pano = $(div).closest('.panorama')
     let currentIndex = $(div).attr('index');
-    let totalHotSpots = $(pano).find('.custom-hotspot').length
+    let totalHotSpots = $(pano).find('.custom-hotspot').length;
+
+    let closeWord = $(pano).find('.close-text').text();
+    let closeButton = `<button class='close-modal' aria-label='` + closeWord + `'>X</button>"`
 
     let aria = this.div.ariaLabel;
     $(div).closest('.panorama').find('.vo-content').text(aria)
@@ -62,6 +65,7 @@ function clickOpenModal() {
     console.log(this)
     // create the overlay, append to body
     let overlay = $(this.div).find('.hs-inner-wrap').clone()
+    $(closeButton).prependTo(overlay);
     $(overlay).appendTo(pano);
     $(overlay).wrap('<div class="pano-modal active" aria-role="dialog" tabindex=0></div>')
 
@@ -96,7 +100,7 @@ function clickOpenModal() {
 
 }
 
-$(document).on('click', '.pano-modal.active', function() { 
+$(document).on('click', '.close-modal', function() { 
 
     $(this).closest('.panorama').find('.ctrl.fullscreen').attr("aria-hidden", false);
     $(this).closest('.panorama').find('.ctrl.fullscreen').attr('disabled', false); 
@@ -110,7 +114,7 @@ $(document).on('click', '.pano-modal.active', function() {
     $(this).closest('.panorama').find('.ctrl.zoom-out .zoom-out-disabled').addClass('hidden'); 
 
     $(this).closest('.panorama').find('.vo-content').focus();
-    $(this).remove();
+    $(this).closest('.pano-modal.active').remove();
     // closeOverlay();
     // scroll position - chrome
     let windowOffset = window.pageYOffset;
@@ -388,7 +392,7 @@ $(document).ready(function () {
             }
         })
 
-        $(pano).find('.pano-modal.active').click();
+        $(pano).find('.pano-modal.active .close-modal').click();
 
         let nextYaw;
         let nextPitch;
