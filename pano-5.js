@@ -1,4 +1,7 @@
 function clickOpenTooltip() {
+    // scroll position - chrome
+    let windowOffset = window.pageYOffset;
+
     let div = this.div;
     let innerDiv = $(div).find('.hs-inner-wrap');
     let pano = $(div).closest('.panorama')
@@ -34,8 +37,6 @@ function clickOpenTooltip() {
     checkPrevButton(currentIndex, totalHotSpots, pano);
     updateCount(totalViewed, totalHotSpots, pano);
 
-    // scroll position - chrome
-    let windowOffset = window.pageYOffset;
 
     // get then set scroll position so there is no jumping
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop
@@ -48,6 +49,9 @@ function clickOpenTooltip() {
 }
 
 function clickOpenModal() {
+    // scroll position - chrome
+    let windowOffset = window.pageYOffset;
+
     let div = this.div;
     let pano = $(div).closest('.panorama')
     let currentIndex = $(div).attr('index');
@@ -87,8 +91,6 @@ function clickOpenModal() {
     checkPrevButton(currentIndex, totalHotSpots, pano);
     updateCount(totalViewed, totalHotSpots, pano);
 
-    // scroll position - chrome
-    let windowOffset = window.pageYOffset;
 
     // get then set scroll position so there is no jumping
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop
@@ -101,6 +103,8 @@ function clickOpenModal() {
 }
 
 $(document).on('click', '.close-modal', function() { 
+    // scroll position - chrome
+    let windowOffset = window.pageYOffset;
 
     $(this).closest('.panorama').find('.ctrl.fullscreen').attr("aria-hidden", false);
     $(this).closest('.panorama').find('.ctrl.fullscreen').attr('disabled', false); 
@@ -116,8 +120,6 @@ $(document).on('click', '.close-modal', function() {
     $(this).closest('.panorama').find('.vo-content').focus();
     $(this).closest('.pano-modal.active').remove();
     // closeOverlay();
-    // scroll position - chrome
-    let windowOffset = window.pageYOffset;
 
     // get then set scroll position so there is no jumping
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop
@@ -258,6 +260,7 @@ $(document).ready(function () {
     })
 
     $('.panorama').each(function () {
+        
         $(this).attr('tabindex', 0)
 
         let pano = this;
