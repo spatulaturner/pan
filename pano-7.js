@@ -540,7 +540,7 @@ $(document).ready(function () {
 
     })
 
-    $(document).on('click touch', '.pano-modal', function (e) {
-        $(this).find('.close-modal').click();
-    })
+    // $(document).on('click touch', '.pano-modal', function (e) {
+    //     $(this).find('.close-modal').click();
+    // })
 })
